@@ -170,7 +170,6 @@ export async function webhookStripe(req,res){
     
       const order = await OrderModel.insertMany(orderProduct)
 
-        console.log(order)
         if(Boolean(order[0])){
             const removeCartItems = await  UserModel.findByIdAndUpdate(userId,{
                 shopping_cart : []
@@ -182,7 +181,6 @@ export async function webhookStripe(req,res){
       console.log(`Unhandled event type ${event.type}`);
   }
 
-  // Return a res to acknowledge receipt of the event
   res.json({received: true});
 }
 
