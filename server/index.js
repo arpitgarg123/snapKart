@@ -29,7 +29,11 @@ app.use(morgan())
 app.use(
     helmet.contentSecurityPolicy({
       directives: {
+        defaultSrc: ["'self'"],
         imgSrc: ["'self'", "data:", "https://res.cloudinary.com"],
+        scriptSrc: ["'self'", "https://js.stripe.com"],
+        frameSrc: ["'self'", "https://js.stripe.com"],
+        connectSrc: ["'self'", "https://api.stripe.com"],
       },
     })
   );
