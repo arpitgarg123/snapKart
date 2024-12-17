@@ -148,12 +148,16 @@ const getOrderProductItems = async({
 
 //http://localhost:8080/api/order/webhook
 export async function webhookStripe(req,res){
-    const event = req.body;
+    let event;
     const endPointSecret = process.env.STRIPE_ENPOINT_WEBHOOK_SECRET_KEY
+    const sig = req.headers['stripe-signature'];
+      try {
+        event = Stripe.webhooks.constructEvent(req.body, sig, endPointSecret);
+    } catch (err) {
+        console.log(`Webhook signature verification failed: ${err.message}`);
+        return res.status(400).send(`Webhook Error: ${err.message}`);
+    }
 
-    console.log("event",event)
-
-    // Handle the event 
   switch (event.type) {
     case 'checkout.session.completed':
       const session = event.data.object;
