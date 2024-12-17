@@ -26,9 +26,13 @@ app.use(cors({
 app.use(express.json()) 
 app.use(cookieParser())
 app.use(morgan())
-app.use(helmet({
-    crossOriginResourcePolicy : false
-}))
+app.use(
+    helmet.contentSecurityPolicy({
+      directives: {
+        imgSrc: ["'self'", "data:", "https://res.cloudinary.com"],
+      },
+    })
+  );
 
 const PORT = 8080 || process.env.PORT 
 
