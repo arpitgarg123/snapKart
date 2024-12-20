@@ -172,7 +172,7 @@ export async function webhookStripe(req,res){
             payment_status : session.payment_status,
         })
     
-      const order = await OrderModel.insertMany(orderProduct)
+      const order = await OrderModel.insertMany(orderProduct)  
 
         if(Boolean(order[0])){
             const removeCartItems = await  UserModel.findByIdAndUpdate(userId,{
