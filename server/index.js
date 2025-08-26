@@ -54,7 +54,7 @@ app.use('/api/order',orderRouter)
 app.use(express.static(path.join( _dirname,"/client/dist")));
 app.get("*",(_,res)=>{
     res.sendFile(path.resolve(_dirname,"client","dist","index.html"));
-})
+}) 
 connectDB().then(()=>{
     app.listen(PORT,()=>{
         console.log("Server is running",PORT)

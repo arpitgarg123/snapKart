@@ -1,5 +1,5 @@
 export const baseURL = "https://snapkart-nq7u.onrender.com"
-
+// export const baseURL = "http://localhost:8080/" // for development purpose
 const SummaryApi = {
     register : {
         url : '/api/user/register',
